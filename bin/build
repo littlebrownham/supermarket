@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+echo -n "Building with "
+go version
+
+
+BIN=./build/supermarket
+rm -rfv $BIN
+
+go build -race -o $BIN .

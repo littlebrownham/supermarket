@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+echo -n "Testing with "
+go version
+
+GOMAXPROCS=4 go test -v -parallel 4 ./...
