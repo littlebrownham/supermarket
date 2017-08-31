@@ -1,10 +1,9 @@
 FROM golang:1.9
 
-WORKDIR /opt/go/src/github.com/dnguy078/supermarket
-COPY . /opt/go/src/github.com/dnguy078/supermarket
+WORKDIR /opt/go/src/github.com/littlebrownham/supermarket
+COPY . /opt/go/src/github.com/littlebrownham/supermarket
 
 EXPOSE 50200
-
 
 RUN bin/build
 
