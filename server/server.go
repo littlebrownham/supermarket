@@ -10,10 +10,6 @@ import (
 	"github.com/urfave/negroni"
 )
 
-type Dependencies struct {
-	something string
-}
-
 type Server struct {
 	router     *mux.Router
 	httpServer *http.Server
@@ -23,7 +19,6 @@ type Server struct {
 	port int
 }
 
-// func (s *Server) initializeRoutes(config Config, deps Dependencies) {
 func (s *Server) initializeRoutes() {
 	db := marketdb.NewMarketDB()
 	createProduceEndpoint := endpoints.NewProduce(db)

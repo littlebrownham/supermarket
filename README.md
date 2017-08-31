@@ -8,7 +8,7 @@ To build binary, you can run `bin/build` and outputs binary to `build/supermarke
 To run unit test, you can run `bin/test`. Add `--race` for race detection
 
 ## Docker
-To build docker image, `docker run -t supermarketo .`
+To build docker image, `docker build -t supermarket .`
 
 ## Running
 ``` bash
