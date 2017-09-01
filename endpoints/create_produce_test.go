@@ -32,5 +32,5 @@ func TestCreateProduce(t *testing.T) {
 
 	fakeCreateProduce.CreateProduce(w, r)
 
-	assert.Equal(t, http.StatusOK, w.Code)
+	assert.Equal(t, http.StatusForbidden, w.Code)
 }
