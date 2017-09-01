@@ -21,17 +21,18 @@ type Server struct {
 
 func (s *Server) initializeRoutes() {
 	db := marketdb.NewMarketDB()
-	createProduceEndpoint := endpoints.NewProduce(db)
+	createProduceEndpoint := endpoints.NewCreateProduce(db)
 
-	s.router.HandleFunc("/createProduce", createProduceEndpoint.CreateProduce).Methods("POST")
+	s.router.HandleFunc("/createproduce", createProduceEndpoint.CreateProduce).Methods("POST")
+	s.router.HandleFunc("/getproduce", createProduceEndpoint.CreateProduce).Methods("POST")
 }
 
 func New() (*Server, error) {
 	s := &Server{
 		router:     mux.NewRouter(),
 		middleware: negroni.New(),
-		host:       "localhost",
-		port:       8080,
+		host:       "0.0.0.0",
+		port:       50200,
 	}
 
 	s.initializeRoutes()

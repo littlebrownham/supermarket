@@ -23,7 +23,7 @@ type CreateProduce struct {
 	db dbInserter
 }
 
-func NewProduce(db dbInserter) *CreateProduce {
+func NewCreateProduce(db dbInserter) *CreateProduce {
 	return &CreateProduce{
 		db: db,
 	}

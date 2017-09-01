@@ -23,7 +23,7 @@ func (f *fakeDB) Insert(key string, value interface{}, c chan error) {
 
 func TestCreateProduce(t *testing.T) {
 	fakeDB := &fakeDB{}
-	fakeCreateProduce := NewProduce(fakeDB)
+	fakeCreateProduce := NewCreateProduce(fakeDB)
 	assert.NotNil(t, fakeCreateProduce)
 	payload := `{"name":"test product","price": 11.22, "produce_code": "abcd-1234"}`
 
