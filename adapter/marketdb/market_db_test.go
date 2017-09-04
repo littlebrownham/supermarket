@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/littlebrownham/supermarket/shared"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,7 +18,7 @@ func TestMarketDBInsert(t *testing.T) {
 	testCases := []struct {
 		name        string
 		inputKeys   []string
-		inputValues []Product
+		inputValues []shared.Product
 		inputChan   chan error
 
 		expectedErr error
@@ -25,7 +26,7 @@ func TestMarketDBInsert(t *testing.T) {
 		{
 			name:        "duplicate",
 			inputKeys:   []string{"one"},
-			inputValues: []Product{Product{"first value", 23.23}},
+			inputValues: []shared.Product{shared.Product{"first value", 23.23}},
 			inputChan:   make(chan error),
 
 			expectedErr: errors.New("Product one already exist"),
@@ -63,7 +64,11 @@ func TestMarketDBGetAll(t *testing.T) {
 
 	for i := 0; i < expectedEntries; i++ {
 		err := make(chan error)
-		go db.Insert(strconv.Itoa(i), i, err)
+		v := shared.Product{
+			Name:  strconv.Itoa(i),
+			Price: float32(i),
+		}
+		go db.Insert(strconv.Itoa(i), v, err)
 		assert.NoError(t, <-err)
 	}
 

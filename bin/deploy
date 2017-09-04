@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+echo -n "deploying version"
+
+# create the docker image with version tag
+
+# push to docker repo
+
+
+# email to users
+

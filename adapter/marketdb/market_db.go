@@ -3,6 +3,7 @@ package marketdb
 import (
 	"fmt"
 
+	"github.com/littlebrownham/supermarket/shared"
 	"golang.org/x/sync/syncmap"
 )
 
@@ -11,9 +12,10 @@ type MarketDB struct {
 	db syncmap.Map
 }
 
-type Product struct {
-	Name  string
-	Price float32
+type GetProduce struct {
+	Name        string  `json:"name"`
+	ProduceCode string  `json:"produce_code"`
+	Price       float32 `json:"price"`
 }
 
 // NewMarketDB returns a marketDB to handle concurrent inserts/deletes/gets
@@ -35,17 +37,26 @@ func (m *MarketDB) Insert(key string, value interface{}, c chan error) {
 }
 
 // GetAll returns copy of the sync map
-func (m *MarketDB) GetAll() map[string]Product {
-	seen := make(map[string]Product)
+func (m *MarketDB) GetAll() []GetProduce {
+	seen := make([]GetProduce, 0)
 	m.db.Range(func(key, value interface{}) bool {
 		k, ok := key.(string)
 		if !ok {
+			fmt.Println("not valid")
 			return false
 		}
-		v, ok := value.(Product)
-		seen[k] = v
+		v, ok := value.(shared.Product)
+		if !ok {
+			fmt.Println("not valid")
+			return false
+		}
+		getProduce := GetProduce{
+			ProduceCode: k,
+			Price:       v.Price,
+			Name:        v.Name,
+		}
+		seen = append(seen, getProduce)
 		return true
 	})
-
 	return seen
 }

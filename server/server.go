@@ -22,20 +22,28 @@ type Server struct {
 func (s *Server) initializeRoutes() {
 	db := marketdb.NewMarketDB()
 	createProduceEndpoint := endpoints.NewCreateProduce(db)
+	getProduceEndpoint := endpoints.NewGetProduce(db)
 
 	s.router.HandleFunc("/createproduce", createProduceEndpoint.CreateProduce).Methods("POST")
-	s.router.HandleFunc("/getproduce", createProduceEndpoint.CreateProduce).Methods("POST")
+	s.router.HandleFunc("/getproduce", getProduceEndpoint.GetProduce).Methods("GET")
+}
+
+func (s *Server) initializeMiddleware() {
+	// attach a logger middleware here
+
+	s.middleware.UseHandler(s.router)
 }
 
 func New() (*Server, error) {
 	s := &Server{
 		router:     mux.NewRouter(),
 		middleware: negroni.New(),
-		host:       "0.0.0.0",
+		host:       "localhost",
 		port:       50200,
 	}
 
 	s.initializeRoutes()
+	s.initializeMiddleware()
 
 	return s, nil
 }

@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	"encoding/json"
+	"fmt"
 	// "fmt"
 	// "log"
 	"net/http"
@@ -30,6 +31,7 @@ func NewCreateProduce(db dbInserter) *CreateProduce {
 }
 
 func (c *CreateProduce) CreateProduce(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("entered")
 	createProduceReq := &CreateProduceRequest{}
 	if err := json.NewDecoder(req.Body).Decode(createProduceReq); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
