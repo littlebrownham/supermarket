@@ -3,10 +3,12 @@ language: go
 go:
   - 1.9
 
+services:
+  - docker
+
 script: ./bin/test
 
 deploy:
-  # deploy master to production
   - provider: script
     script: ./bin/deploy
     on:
