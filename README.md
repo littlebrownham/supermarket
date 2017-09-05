@@ -20,7 +20,7 @@ docker repo: https://hub.docker.com/r/dnguy078/supermarket/
 `./build/supermarket`
 
 # Runs against docker image
-`docker run --rm supermarket`
+`docker run -p 50200:50200 supermarket`
 ```
 
 
