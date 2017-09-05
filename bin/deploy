@@ -1,11 +1,24 @@
 #!/bin/bash -e
 
-echo -n "deploying version"
+echo -n "Deploying supermarket version - "
+version=`cat VERSION`
+echo "$version"
+
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
 # create the docker image with version tag
+echo "Building docker image"
+docker build -t dnguy078/supermarket:$version .
 
 # push to docker repo
-
+echo "pusher docker image"
+docker push dnguy078/supermarket:$version
 
 # email to users
+echo "Sending notification emails"
+
+curl --request POST  --url https://api.sendgrid.com/v3/mail/send   \
+--header 'authorization: Bearer '$SG_API_KEY'' \
+--header 'Content-Type: application/json' \
+--data '{"personalizations": [{"to": [{"email": "'$SUPERMARKET_NOTIFICATON_EMAIL'"}]}],"from": {"email": "'$SUPERMARKET_NOTIFICATON_EMAIL'"},"subject":"SuperMarket API docker image uploaded '$version'","content": [{"type": "text/plain","value": "Heya!"}], "template_id" : "0e7b1ba9-1eab-4d8d-88f1-bca538cfc7f9"}' -v
 
