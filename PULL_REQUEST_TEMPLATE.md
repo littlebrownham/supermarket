@@ -3,5 +3,5 @@
 ## PR - Merge Checklist:
 - [ ] CR'd
 - [ ] Update CHANGELOG.md
-- [ ] bump VERSION, using sematnic versioning
+- [ ] bump VERSION, using semantic versioning
 
