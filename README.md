@@ -8,9 +8,11 @@ To build binary, you can run `bin/build` and outputs binary to `build/supermarke
 
 ## Test
 To run unit test, you can run `bin/test`. Add `--race` for race detection
+build status: https://travis-ci.org/littlebrownham/supermarket/branches
 
 ## Docker
-To build docker image, `docker build -t supermarket .`
+To build docker image, `docker run -t supermarket .`
+docker repo: https://hub.docker.com/r/dnguy078/supermarket/
 
 ## Running
 ``` bash
@@ -21,15 +23,47 @@ To build docker image, `docker build -t supermarket .`
 `docker run --rm supermarket`
 ```
 
-## API Call (Todo)
-POST /createProduce
-Body:
-{
-    "produce_code": [produce_code:string],
-    "price": [price:float with 2 decimal precision],
-    "name" [name:string name of produce]
-}
-Response:
-200 - Entry added
-400 - Duplicate entry
 
+## SuperMarket API
+#### [POST] /createproduce
+Creates inventory, produce_code must be unique
++ Request
+    + Body
+
+            {
+                "produce_code": "abcd-1234-1234-asbc",
+                "name": "apples",
+                "price": 12.12
+            }
+
+
++ Response 201 (application/json)
+
+        {
+          "produce_code": "abcd-1234-1234-asbc"
+        }
+
++ Response 400 (application/json)
+        - invalid produce_code, name, or price error message
+
+#### [GET] /getproduce
+Returns all produce inventory
++ Response 200 (application/json)
+
+        [
+            {
+                "produce_code": "abcd-1234-1234-asbc",
+                "name": "apples",
+                "price": 12.12
+            },
+            {
+                "produce_code": "abcd-1234-1234-asbd",
+                "name": "potatoes",
+                "price": 12.11
+            }
+        ]
+#### [DELETE] /deleteproduce?produce_code=[produce_code]
+Returns all produce inventory
++ Response 200 (application/json)
++ Response 400 (application/json)
+    - Does not exist

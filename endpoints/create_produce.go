@@ -2,18 +2,16 @@ package endpoints
 
 import (
 	"encoding/json"
-	"fmt"
-	// "fmt"
-	// "log"
 	"net/http"
 
 	"github.com/littlebrownham/supermarket/shared"
+	"github.com/littlebrownham/supermarket/util"
 )
 
 type CreateProduceRequest struct {
 	Name        string  `json:"name"`
 	ProduceCode string  `json:"produce_code"`
-	Price       float32 `json:"price"`
+	Price       float64 `json:"price"`
 }
 
 type dbInserter interface {
@@ -31,10 +29,16 @@ func NewCreateProduce(db dbInserter) *CreateProduce {
 }
 
 func (c *CreateProduce) CreateProduce(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("entered")
 	createProduceReq := &CreateProduceRequest{}
 	if err := json.NewDecoder(req.Body).Decode(createProduceReq); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	validationErr := validate(createProduceReq)
+
+	if validationErr != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(string(validationErr.Error())))
 		return
 	}
 
@@ -47,10 +51,28 @@ func (c *CreateProduce) CreateProduce(w http.ResponseWriter, req *http.Request) 
 	go c.db.Insert(createProduceReq.ProduceCode, produce, chanErr)
 	err := <-chanErr
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	return
+	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte(createProduceReq.ProduceCode))
+}
+
+func validate(req *CreateProduceRequest) error {
+	validateCodeErr := util.ValidateProduceCode(req.ProduceCode)
+	if validateCodeErr != nil {
+		return validateCodeErr
+	}
+	validatePriceErr := util.ValidatePrice(req.Price)
+	if validatePriceErr != nil {
+		return validatePriceErr
+	}
+	validateNameErr := util.ValidateName(req.Name)
+	if validateNameErr != nil {
+		return validateNameErr
+	}
+
+	return nil
 }

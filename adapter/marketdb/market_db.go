@@ -15,7 +15,7 @@ type MarketDB struct {
 type GetProduce struct {
 	Name        string  `json:"name"`
 	ProduceCode string  `json:"produce_code"`
-	Price       float32 `json:"price"`
+	Price       float64 `json:"price"`
 }
 
 // NewMarketDB returns a marketDB to handle concurrent inserts/deletes/gets
@@ -32,6 +32,7 @@ func (m *MarketDB) Insert(key string, value interface{}, c chan error) {
 	if _, ok := m.db.Load(key); !ok {
 		m.db.Store(key, value)
 		c <- nil
+		return
 	}
 	c <- fmt.Errorf("Product %s already exist", key)
 }
@@ -42,12 +43,10 @@ func (m *MarketDB) GetAll() []GetProduce {
 	m.db.Range(func(key, value interface{}) bool {
 		k, ok := key.(string)
 		if !ok {
-			fmt.Println("not valid")
 			return false
 		}
 		v, ok := value.(shared.Product)
 		if !ok {
-			fmt.Println("not valid")
 			return false
 		}
 		getProduce := GetProduce{
@@ -59,4 +58,14 @@ func (m *MarketDB) GetAll() []GetProduce {
 		return true
 	})
 	return seen
+}
+
+// Delete removes an item from the syncmap
+func (m *MarketDB) Delete(key string, c chan error) {
+	if _, ok := m.db.Load(key); ok {
+		m.db.Delete(key)
+		c <- nil
+		return
+	}
+	c <- fmt.Errorf("Product %s does not exist", key)
 }
