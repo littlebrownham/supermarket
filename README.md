@@ -61,7 +61,7 @@ Returns all produce inventory
             }
         ]
 #### [DELETE] /deleteproduce?produce_code=[produce_code]
-Returns all produce inventory
+Deletes a produce inventory
 + Response 200 (application/json)
 + Response 400 (application/json)
     - Does not exist
