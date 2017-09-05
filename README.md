@@ -1,4 +1,4 @@
-# SuperMarket
+# SuperMarket https://travis-ci.org/littlebrownham/supermarket.svg?branch=master
 SuperMarket API to handle produce inventory
 
 ## Building
