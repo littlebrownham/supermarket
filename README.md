@@ -1,5 +1,7 @@
 # SuperMarket
 SuperMarket API to handle produce inventory
+<p><a class="no-attachment-icon" href="" target="_blank"><img src="https://travis-ci.org/littlebrownham/supermarket.svg?branch=master" alt=""></a></p>
+
 
 ## Building
 To build binary, you can run `bin/build` and outputs binary to `build/supermarket`.
