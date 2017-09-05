@@ -7,12 +7,9 @@ import (
 )
 
 func main() {
-	server, err := server.New()
+	server := server.New()
+	err := server.Start()
 	if err != nil {
-		fmt.Println("unable to start up")
-	}
-	err = server.Start()
-	if err != nil {
-		fmt.Println("unable to start up")
+		fmt.Printf("unable to start up %v", err)
 	}
 }

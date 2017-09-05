@@ -2,7 +2,6 @@ package endpoints
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/littlebrownham/supermarket/adapter/marketdb"
@@ -23,14 +22,11 @@ func NewGetProduce(db dbGetter) *GetProduce {
 }
 
 func (c *GetProduce) GetProduce(w http.ResponseWriter, req *http.Request) {
-	// c.db.
-	fmt.Println("entered GEt")
 	produce := c.db.GetAll()
 	jsonString, err := json.Marshal(produce)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		return
 	}
-	fmt.Print(string(jsonString))
 	w.Write(jsonString)
-	return
 }

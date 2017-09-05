@@ -20,7 +20,7 @@ To build docker image, `docker build -t supermarket .`
 ```
 
 ## API Call (Todo)
-POST /createProduce
+POST /createproduce
 Body:
 {
     "produce_code": [produce_code:string],

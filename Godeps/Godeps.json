@@ -17,9 +17,18 @@
 			"Rev": "ac112f7d75a0714af1bd86ab17749b31f7809640"
 		},
 		{
+			"ImportPath": "github.com/meatballhat/negroni-logrus",
+			"Rev": "31067281800f66f57548a7a32d9c6c5f963fef83"
+		},
+		{
 			"ImportPath": "github.com/pmezard/go-difflib/difflib",
 			"Comment": "v1.0.0",
 			"Rev": "792786c7400a136282c1664665ae0a8db921c6c2"
+		},
+		{
+			"ImportPath": "github.com/sirupsen/logrus",
+			"Comment": "v1.0.3-11-g89742ae",
+			"Rev": "89742aefa4b206dcf400792f3bd35b542998eb3b"
 		},
 		{
 			"ImportPath": "github.com/stretchr/testify/assert",
@@ -32,8 +41,20 @@
 			"Rev": "c262547a5086067ebe455c81db5cc52eb298ac3c"
 		},
 		{
+			"ImportPath": "golang.org/x/crypto/ssh/terminal",
+			"Rev": "81e90905daefcd6fd217b62423c0908922eadb30"
+		},
+		{
 			"ImportPath": "golang.org/x/sync/syncmap",
 			"Rev": "f52d1811a62927559de87708c8913c1650ce4f26"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows",
+			"Rev": "7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce"
 		}
 	]
 }

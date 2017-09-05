@@ -26,7 +26,7 @@ func TestMarketDBInsert(t *testing.T) {
 		{
 			name:        "duplicate",
 			inputKeys:   []string{"one"},
-			inputValues: []shared.Product{shared.Product{"first value", 23.23}},
+			inputValues: []shared.Product{shared.Product{Name: "first value", Price: float64(23.23)}},
 			inputChan:   make(chan error),
 
 			expectedErr: errors.New("Product one already exist"),
@@ -66,7 +66,7 @@ func TestMarketDBGetAll(t *testing.T) {
 		err := make(chan error)
 		v := shared.Product{
 			Name:  strconv.Itoa(i),
-			Price: float32(i),
+			Price: float64(i),
 		}
 		go db.Insert(strconv.Itoa(i), v, err)
 		assert.NoError(t, <-err)
@@ -74,4 +74,25 @@ func TestMarketDBGetAll(t *testing.T) {
 
 	items := db.GetAll()
 	assert.Equal(t, expectedEntries, len(items))
+	for i := range items {
+		assert.Contains(t, items, GetProduce{Name: strconv.Itoa(i), Price: float64(i), ProduceCode: strconv.Itoa(i)})
+	}
+}
+
+func TestMarketDBDelete(t *testing.T) {
+	db := NewMarketDB()
+	for i := 0; i < 10; i++ {
+		err := make(chan error)
+		go db.Insert(strconv.Itoa(i), i, err)
+		assert.NoError(t, <-err)
+		go db.Delete(strconv.Itoa(i), err)
+		assert.NoError(t, <-err)
+	}
+
+	items := db.GetAll()
+	assert.Equal(t, 0, len(items))
+
+	err := make(chan error)
+	go db.Delete("non existent", err)
+	assert.Error(t, <-err)
 }
