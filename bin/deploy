@@ -11,7 +11,7 @@ echo "Building docker image"
 docker build -t dnguy078/supermarket:$version .
 
 # push to docker repo
-echo "pusher docker image"
+echo "Pushing docker image"
 docker push dnguy078/supermarket:$version
 
 # email to users
