@@ -1,6 +1,6 @@
 # SuperMarket
 SuperMarket API to handle produce inventory
-<p><a class="no-attachment-icon" href="" target="_blank"><img src="https://travis-ci.org/littlebrownham/supermarket.svg?branch=master" alt=""></a></p>
+<p><a class="no-attachment-icon" href="https://travis-ci.org/littlebrownham/supermarket" target="_blank"><img src="https://travis-ci.org/littlebrownham/supermarket.svg?branch=master" alt=""></a></p>
 
 
 ## Building
