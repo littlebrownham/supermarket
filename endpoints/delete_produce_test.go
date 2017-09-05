@@ -20,7 +20,7 @@ func (f *fakeDBDeleter) Delete(key string, c chan error) {
 }
 
 func TestDeleteProduce(t *testing.T) {
-	url := "/deleteproduce?produce_code=something"
+	url := "/deleteproduce?produce_code=1234-abcd-1234-abcd"
 	cases := []struct {
 		name string
 		err  error
@@ -35,9 +35,10 @@ func TestDeleteProduce(t *testing.T) {
 			expectedStatusCode: http.StatusOK,
 		},
 		{
-			name:               "empty query param",
+			name:               "invalid query param",
 			url:                "/deleteproduce?something=something",
 			expectedStatusCode: http.StatusBadRequest,
+			expectedBody:       "invalid produce code",
 		},
 		{
 			name: "not found",

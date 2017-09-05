@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/littlebrownham/supermarket/shared"
-	"github.com/littlebrownham/supermarket/util/validator"
+	"github.com/littlebrownham/supermarket/util"
 )
 
 type CreateProduceRequest struct {
@@ -34,6 +34,13 @@ func (c *CreateProduce) CreateProduce(w http.ResponseWriter, req *http.Request) 
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	validationErr := validate(createProduceReq)
+
+	if validationErr != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(string(validationErr.Error())))
+		return
+	}
 
 	chanErr := make(chan error)
 	produce := shared.Product{
@@ -52,7 +59,19 @@ func (c *CreateProduce) CreateProduce(w http.ResponseWriter, req *http.Request) 
 	w.WriteHeader(http.StatusOK)
 }
 
-func validate(req CreateProduceRequest) error {
-	validateCode := 
+func validate(req *CreateProduceRequest) error {
+	validateCodeErr := util.ValidateProduceCode(req.ProduceCode)
+	if validateCodeErr != nil {
+		return validateCodeErr
+	}
+	validatePriceErr := util.ValidatePrice(req.Price)
+	if validatePriceErr != nil {
+		return validatePriceErr
+	}
+	validateNameErr := util.ValidateName(req.Name)
+	if validateNameErr != nil {
+		return validateNameErr
+	}
 
+	return nil
 }

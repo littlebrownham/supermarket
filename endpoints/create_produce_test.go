@@ -29,22 +29,24 @@ func TestCreateProduce(t *testing.T) {
 		err     error
 
 		expectedStatusCode int
+		expectedBody       string
 	}{
 		{
 			name:               "success",
-			payload:            `{"name":"test product","price": 11.22, "produce_code": "abcd-1234"}`,
+			payload:            `{"name":"test product","price": 11.22, "produce_code": "abcd-1234-abcd-1234"}`,
 			expectedStatusCode: http.StatusOK,
 		},
 		{
 			name:               "bad request unmarshalling",
-			payload:            `{"name":"test product","price": "invalid", "prvalid": "abcd-1234"}`,
+			payload:            `{"name":"test product","price": "invalid", "prvalid": "abcd-1234-abcd-1234"}`,
 			expectedStatusCode: http.StatusBadRequest,
 		},
 		{
 			name:               "error writing to db duplicate entry",
-			payload:            `{"name":"test product","price": 11.22, "produce_code": "abcd-1234"}`,
+			payload:            `{"name":"test product","price": 11.22, "produce_code": "abcd-1234-abcd-1234"}`,
 			err:                errors.New("some error"),
 			expectedStatusCode: http.StatusBadRequest,
+			expectedBody:       "some error",
 		},
 	}
 
@@ -59,5 +61,6 @@ func TestCreateProduce(t *testing.T) {
 
 		fakeCreateProduce.CreateProduce(w, r)
 		assert.Equal(t, c.expectedStatusCode, w.Code)
+		assert.Equal(t, c.expectedBody, w.Body.String())
 	}
 }

@@ -2,6 +2,8 @@ package endpoints
 
 import (
 	"net/http"
+
+	"github.com/littlebrownham/supermarket/util"
 )
 
 type dbProducerDeleter interface {
@@ -25,6 +27,11 @@ func (d *DeleteProduce) DeleteProduce(w http.ResponseWriter, req *http.Request) 
 	if produce_code == "" {
 		w.WriteHeader(http.StatusBadRequest)
 	}
+	if validationErr := validateDeleteReq(produce_code); validationErr != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(string(validationErr.Error())))
+		return
+	}
 
 	chanErr := make(chan error)
 	go d.db.Delete(produce_code, chanErr)
@@ -36,4 +43,7 @@ func (d *DeleteProduce) DeleteProduce(w http.ResponseWriter, req *http.Request) 
 	}
 
 	w.WriteHeader(http.StatusOK)
+}
+func validateDeleteReq(produceCode string) error {
+	return util.ValidateProduceCode(produceCode)
 }
