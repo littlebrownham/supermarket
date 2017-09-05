@@ -15,7 +15,7 @@ type MarketDB struct {
 type GetProduce struct {
 	Name        string  `json:"name"`
 	ProduceCode string  `json:"produce_code"`
-	Price       float64 `json:"price"`
+	Price       float64 `json:"unit_price"`
 }
 
 // NewMarketDB returns a marketDB to handle concurrent inserts/deletes/gets

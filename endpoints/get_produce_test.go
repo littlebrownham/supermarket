@@ -30,5 +30,5 @@ func TestGetProduce(t *testing.T) {
 	fakeGetProduce.GetProduce(w, r)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Equal(t, `[{"name":"lettuce","produce_code":"1235-abcd","price":12.12}]`, w.Body.String())
+	assert.Equal(t, `[{"name":"lettuce","produce_code":"1235-abcd","unit_price":12.12}]`, w.Body.String())
 }

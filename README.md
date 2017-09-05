@@ -33,7 +33,7 @@ Creates inventory, produce_code must be unique
             {
                 "produce_code": "abcd-1234-1234-asbc",
                 "name": "apples",
-                "price": 12.12
+                "unit_price": 12.12
             }
 
 
@@ -54,16 +54,16 @@ Returns all produce inventory
             {
                 "produce_code": "abcd-1234-1234-asbc",
                 "name": "apples",
-                "price": 12.12
+                "unit_price": 12.12
             },
             {
                 "produce_code": "abcd-1234-1234-asbd",
                 "name": "potatoes",
-                "price": 12.11
+                "unit_price": 12.11
             }
         ]
 #### [DELETE] /deleteproduce?produce_code=[produce_code]
-Returns all produce inventory
+Deletes a produce inventory
 + Response 200 (application/json)
 + Response 400 (application/json)
     - Does not exist

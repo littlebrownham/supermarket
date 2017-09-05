@@ -39,7 +39,7 @@ func TestCreateProduce(t *testing.T) {
 		},
 		{
 			name:               "bad request unmarshalling",
-			payload:            `{"name":"test product","price": "invalid", "prvalid": "abcd-1234-abcd-1234"}`,
+			payload:            `{"name":"test product","unit_price": "invalid", "prvalid": "abcd-1234-abcd-1234"}`,
 			expectedStatusCode: http.StatusBadRequest,
 		},
 		{
@@ -61,7 +61,7 @@ func TestCreateProduce(t *testing.T) {
 		w := httptest.NewRecorder()
 
 		fakeCreateProduce.CreateProduce(w, r)
-		assert.Equal(t, c.expectedStatusCode, w.Code)
-		assert.Equal(t, c.expectedBody, w.Body.String())
+		assert.Equal(t, c.expectedStatusCode, w.Code, c.name)
+		assert.Equal(t, c.expectedBody, w.Body.String(), c.name)
 	}
 }
