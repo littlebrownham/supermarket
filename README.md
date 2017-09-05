@@ -6,9 +6,11 @@ To build binary, you can run `bin/build` and outputs binary to `build/supermarke
 
 ## Test
 To run unit test, you can run `bin/test`. Add `--race` for race detection
+build status: https://travis-ci.org/littlebrownham/supermarket/branches
 
 ## Docker
 To build docker image, `docker run -t supermarket .`
+docker repo: https://hub.docker.com/r/dnguy078/supermarket/
 
 ## Running
 ``` bash
@@ -18,6 +20,7 @@ To build docker image, `docker run -t supermarket .`
 # Runs against docker image
 `docker run --rm supermarket`
 ```
+
 
 ## SuperMarket API
 #### [POST] /createproduce
