@@ -41,7 +41,7 @@ func New() *Server {
 	s := &Server{
 		router:     mux.NewRouter(),
 		middleware: negroni.New(),
-		host:       "localhost",
+		host:       "0.0.0.0",
 		port:       50200,
 	}
 

@@ -56,7 +56,8 @@ func (c *CreateProduce) CreateProduce(w http.ResponseWriter, req *http.Request) 
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte(createProduceReq.ProduceCode))
 }
 
 func validate(req *CreateProduceRequest) error {

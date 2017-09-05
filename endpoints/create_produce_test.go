@@ -34,7 +34,8 @@ func TestCreateProduce(t *testing.T) {
 		{
 			name:               "success",
 			payload:            `{"name":"test product","price": 11.22, "produce_code": "abcd-1234-abcd-1234"}`,
-			expectedStatusCode: http.StatusOK,
+			expectedStatusCode: http.StatusCreated,
+			expectedBody:       "abcd-1234-abcd-1234",
 		},
 		{
 			name:               "bad request unmarshalling",
