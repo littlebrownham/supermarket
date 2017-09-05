@@ -6,7 +6,6 @@ go:
 script: ./bin/test
 
 deploy:
-  # deploy master to production
   - provider: script
     script: ./bin/deploy
     on:
