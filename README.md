@@ -11,7 +11,7 @@ To run unit test, you can run `bin/test`. Add `--race` for race detection
 build status: https://travis-ci.org/littlebrownham/supermarket/branches
 
 ## Docker
-To build docker image, `docker run -t supermarket .`
+To build docker image, `docker build -t supermarket .`
 docker repo: https://hub.docker.com/r/dnguy078/supermarket/
 
 ## Running
@@ -20,7 +20,7 @@ docker repo: https://hub.docker.com/r/dnguy078/supermarket/
 `./build/supermarket`
 
 # Runs against docker image
-`docker run -p 50200:50200 supermarket`
+`docker run -p 50200:50200 dnguy078/supermarket:[tag]`
 ```
 
 
