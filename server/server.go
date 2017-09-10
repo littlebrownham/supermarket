@@ -57,7 +57,7 @@ func (s *Server) Start() error {
 
 	fmt.Printf("SuperMarket API listening on %s.....\n", addr)
 	if err := s.httpServer.ListenAndServe(); err != nil {
-		return fmt.Errorf("error occurred when starting up rts %s", err)
+		return fmt.Errorf("error occurred when starting up supermarket %s", err)
 	}
 
 	return nil
