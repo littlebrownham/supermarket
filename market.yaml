@@ -6,10 +6,6 @@ image_resource:
     repository: golang
     tag: '1.9'
 
-inputs:
-- name: supermarket-master
-  path: go/src/github.com/littlebrownham/supermarket
-
 run:
   dir: go/src/github.com/littlebrownham/supermarket
   path: bin/test 
