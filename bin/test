@@ -3,5 +3,4 @@
 echo -n "Testing with "
 go version
 
-ls -lah -R
-GOMAXPROCS=4 go test -v -parallel 4 ./...
+go test -v ./...
