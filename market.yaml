@@ -11,5 +11,6 @@ inputs:
   path: go/src/github.com/littlebrownham/supermarket
 
 run:
-  path: go/src/github.com/littlebrownham/supermarket/bin/test
+  dir: go/src/github.com/littlebrownham/supermarket
+  path: bin/test 
 
