@@ -7,4 +7,4 @@ image_resource:
     tag: '1.9'
 
 run:
-  path: ./bin/test 
+  path: bin/test 
