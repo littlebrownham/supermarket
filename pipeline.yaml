@@ -1,0 +1,13 @@
+resources:
+  - name: supermarket-master
+    type: git
+    source:
+      uri: https://github.com/littlebrownham/supermarket
+      branch: master
+
+jobs:
+  - name: test
+    plan:
+    - get: supermarket-master
+    - task: unit
+      file: market.yaml
