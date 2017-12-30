@@ -8,6 +8,3 @@ image_resource:
 
 run:
   path: go/src/github.com/littlebrownham/supermarket/bin/test
-
-inputs:
-- name: supermarket
