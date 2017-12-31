@@ -12,4 +12,3 @@ inputs:
 
 run:
   path: go/src/github.com/littlebrownham/supermarket/bin/test
-

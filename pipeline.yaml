@@ -6,8 +6,8 @@ resources:
       branch: master
 
 jobs:
-  - name: test
+  - name: unit-test
     plan:
     - get: supermarket-master
     - task: unit
-      file: supermarket-master/market.yaml
+      file: supermarket-master/jobs/market.yaml

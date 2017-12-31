@@ -3,8 +3,10 @@
 echo -n "Building with "
 go version
 
+echo $GOPATH
 
 BIN=./build/supermarket
 rm -rfv $BIN
 
-go build -race -o $BIN .
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o $BIN .
+

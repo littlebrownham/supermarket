@@ -1,11 +1,8 @@
-FROM golang:1.9
+FROM scratch
 
 WORKDIR /go/src/github.com/littlebrownham/supermarket
-COPY . /go/src/github.com/littlebrownham/supermarket
+COPY build/supermarket /go/src/github.com/littlebrownham/supermarket
 
 EXPOSE 50200
 
-RUN bin/build
-
-CMD ["build/supermarket"]
-
+CMD ["./supermarket"]
