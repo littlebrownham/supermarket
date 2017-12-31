@@ -4,7 +4,7 @@ echo -n "Testing with "
 go version
 
 export GOPATH=$(pwd)/go
-#export PATH=$GOPATH/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 
 go get -u github.com/golang/dep/cmd/dep
 
