@@ -2,8 +2,7 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source:
-    source: {repository: busybox}
+  source: {repository: busybox}
 
 run:
   path: ls
