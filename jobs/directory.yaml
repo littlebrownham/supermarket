@@ -5,7 +5,4 @@ image_resource:
   source: {repository: busybox}
 
 run:
-  path: ls
-  args: [-lahR]
-
-  
+  path: go/src/github.com/littlebrownham/supermarket/bin/directory
