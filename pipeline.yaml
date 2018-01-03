@@ -10,4 +10,4 @@ jobs:
     plan:
     - get: supermarket-master
     - task: unit
-      file: supermarket-master/jobs/directory.yaml
+      file: supermarket-master/jobs/market.yaml
