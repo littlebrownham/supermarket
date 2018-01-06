@@ -4,6 +4,12 @@ resources:
     source:
       uri: https://github.com/littlebrownham/supermarket
       branch: master
+  - name: supermarket-docker-image
+    type: docker-image
+    source:
+      repository: dnguy078/market
+      username: {{dockerhub-username}}
+      password: {{dockerhub-password}}
 
 jobs:
   - name: unit-test
@@ -11,3 +17,8 @@ jobs:
     - get: supermarket-master
     - task: unit
       file: supermarket-master/jobs/market.yaml
+
+  - name: build-docker-image
+    plan:
+    - put: supermarket-docker-image
+      params: {build: workspace}
