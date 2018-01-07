@@ -4,6 +4,8 @@ echo -n "Building with "
 go version
 
 echo $GOPATH
+export GOPATH=$(pwd)/go
+cd $GOPATH/src/github.com/littlebrownham/supermarket
 
 BIN=./build/supermarket
 rm -rfv $BIN
