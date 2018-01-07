@@ -4,6 +4,7 @@ resources:
     source:
       uri: https://github.com/littlebrownham/supermarket
       branch: master
+
   - name: supermarket-docker-image
     type: docker-image
     source:
@@ -17,8 +18,14 @@ jobs:
     - get: supermarket-master
     - task: unit
       file: supermarket-master/jobs/market.yaml
+      on_success: 
+        task: build-go-binary
+        file: supermarket-master/jobs/build.yaml
+ 
 
-  - name: build-docker-image
-    plan:
-    - put: supermarket-docker-image
-      params: {build: .}
+
+  # - name: build-docker-image
+  #   plan:
+  #   - get: supermarket-master
+  #   - put: supermarket-docker-image
+  #     params: {build: .}
