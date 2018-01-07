@@ -1,7 +1,7 @@
 FROM scratch
 
 WORKDIR /go/src/github.com/littlebrownham/supermarket
-COPY build/supermarket /go/src/github.com/littlebrownham/supermarket
+COPY dist/supermarket /go/src/github.com/littlebrownham/supermarket
 
 EXPOSE 50200
 

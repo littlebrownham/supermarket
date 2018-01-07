@@ -3,10 +3,19 @@
 echo -n "Building with "
 go version
 
-echo $GOPATH
 
-BIN=./build/supermarket
-rm -rfv $BIN
+echo "Gopath is: " $GOPATH
+echo "pwd is: " $PWD
+echo ""
+cd src/github.com/littlebrownham/supermarket
+echo "current pwd is: " $PWD
 
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o $BIN .
+# build go binary to dist folder
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o dist/supermarket .
+
+# copy Dockerfile to dist folder
+cp Dockerfile dist/Dockerfile
+
+echo "List whats in the /dist directory"
+ls -lat dis
 

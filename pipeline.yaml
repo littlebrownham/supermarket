@@ -21,6 +21,9 @@ jobs:
  
   - name: publish
     plan:
+    - passed: [unit-test]
     - get: supermarket-master
+    - task: task-build
+      file: supermarket-master/jobs/build.yaml
     - put: supermarket-docker-image
       params: {build: supermarket-master}
