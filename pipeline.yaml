@@ -18,12 +18,12 @@ jobs:
     - get: supermarket-master
     - task: unit
       file: supermarket-master/jobs/market.yaml
- 
   - name: publish
     plan:
-    - passed: [unit-test]
     - get: supermarket-master
+      trigger: true
+      passed: [unit-test]
     - task: task-build
       file: supermarket-master/jobs/build.yaml
     - put: supermarket-docker-image
-      params: {build: supermarket-master}
+      params: {build: "dist"}
