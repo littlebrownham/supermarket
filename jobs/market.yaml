@@ -10,9 +10,5 @@ inputs:
 - name: supermarket-master
   path: go/src/github.com/littlebrownham/supermarket
 
-outputs:
-- name: go-binary
-  path: go/src/github.com/littlebrownham/supermarket/build/
-
 run:
   path: go/src/github.com/littlebrownham/supermarket/bin/test
