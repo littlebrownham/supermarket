@@ -7,7 +7,6 @@ go version
 echo "Gopath is: " $GOPATH
 echo "pwd is: " $PWD
 echo ""
-cd src/github.com/littlebrownham/supermarket
 echo "current pwd is: " $PWD
 
 # build go binary to dist folder
